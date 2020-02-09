@@ -1,0 +1,3 @@
+[submodule "gsi"]
+	path = gsi
+	url = https://github.com/mdhedelund/CSGO-GSI.git
