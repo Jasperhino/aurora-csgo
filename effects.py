@@ -79,12 +79,13 @@ def flash_effect(nl):
     pp = nl.panel_positions["positionData"]
     panel_ids = [ panel["panelId"] for panel in pp ]
     animData = [num_panels]
-    num_frames = 255
+    num_frames = 1
     for id in panel_ids:
         animData.extend([id, num_frames])
+        #animData.extend([255, 255, 255, 255, -1])
         for i in range(num_frames):
             b = 255 - int(abs(i))
-            animData.extend([b, b, b, 255, 1])
+            animData.extend([b, b, b, 255, 0])
 
     
     effect = {
@@ -95,12 +96,29 @@ def flash_effect(nl):
 
     effect["animData"] = " ".join(map(str, animData))
     return effect
-        
+
+
+def flash():
+    return {
+        'command': 'displayTemp',
+        'version': '2.0',
+        "duration": 1,
+        'animName': 'Flash',
+        'animType': 'plugin',
+        'colorType': 'HSB',
+        'palette': [{'hue': 0, 'saturation': 0, 'brightness': 100, 'probability': 0.0}], 'pluginType': 'color',
+        'pluginUuid': '713518c1-d560-47db-8991-de780af71d1e',
+        'pluginOptions': [
+            {'name': 'delayTime', 'value': 0},
+            {'name': 'loop', 'value': False},
+            {'name': 'transTime', 'value': 0}],
+        'hasOverlay': False
+    }
 
 def fire_effect():
     effect = {
         "command": "displayTemp",
-        "duration": 3,
+        "duration": 2,
         "version": "2.0",
         "animName": "Fire",
         "animType": "plugin",

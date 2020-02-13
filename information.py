@@ -129,4 +129,21 @@ class Round:
     def __init__(self):
         self.phase = None
         self.win_team = None
-        self.bomb = None
+        self._bomb = None
+        self.observers  = []
+
+    @property
+    def bomb(self):
+        return self._bomb
+    
+    @bomb.setter
+    def bomb(self, value):
+        if(self._bomb != value):
+            for callback in self.observers:
+                callback(value)
+        self._bomb = value
+
+    def register(self, callback):
+        self.observers.append(callback)
+
+    
